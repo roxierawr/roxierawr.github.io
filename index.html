@@ -3,82 +3,496 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
+    <title>My Personal Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
     <style>
+        /* Your existing styles */
         body {
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'DotGothic16', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            position: relative;
+        }
+        .header {
+            background-color: var(--header-background);
+            color: var(--header-text-color);
+            text-align: center;
+            padding: 20px 0;
+            text-transform: lowercase;
+            position: relative;
+        }
+        .header h1 {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+        .wing-left {
+            position: absolute;
+            left: calc(50% - 150px);
+            top: 50%;
+            transform: translate(-100%, -50%);
+            width: 50px;
+            height: auto;
+            z-index: 0;
+        }
+        .wing-right {
+            position: absolute;
+            right: calc(50% - 150px);
+            top: 50%;
+            transform: translate(100%, -50%);
+            width: 50px;
+            height: auto;
+            z-index: 0;
+        }
+        .navbar {
+            background-color: var(--navbar-background);
+            overflow: hidden;
+            text-align: center;
+            text-transform: lowercase;
+            padding: 10px 0;
+        }
+        .navbar a {
+            display: inline-block;
+            color: var(--link-color);
+            text-align: center;
+            padding: 14px 50px;
+            text-decoration: none;
+            transition: text-shadow 0.3s ease;
+        }
+        .navbar a:hover {
+            text-shadow: 0 0 5px var(--link-hover-glow), 0 0 10px var(--link-hover-glow), 0 0 15px var(--link-hover-glow), 0 0 20px var(--link-hover-glow);
         }
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: baby pink;
+            display: flex;
+            justify-content: center;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .content-box {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            background-color: var(--content-background);
             border-radius: 10px;
+            overflow: hidden;
+            text-transform: lowercase;
         }
-        .title {
+        .column {
+            flex: 1;
+            padding: 10px;
+            max-height: 600px;
+            overflow-y: auto;
+            scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+            scrollbar-width: auto;
+        }
+        .column::-webkit-scrollbar {
+            width: 16px;
+        }
+        .column::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+        .column::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-thumb);
+            border-radius: 10px;
+            border: 3px solid var(--scrollbar-track);
+        }
+        .left {
+            flex: 0 0 15%;
+            background-color: var(--column-background);
+            min-width: 150px;
+        }
+        .middle {
+            flex: 1;
+            background-color: var(--column-background);
+            text-transform: none;
+        }
+        .right {
+            flex: 0 0 15%;
+            background-color: var(--column-background);
+        }
+        .footer {
+            background-color: var(--footer-background);
+            color: var(--footer-text-color);
             text-align: center;
-            font-size: 2em;
-            margin-bottom: 20px;
-            position: relative;
-            color: black;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            text-transform: lowercase;
         }
-        .nav {
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+        .theme-toggle input {
             position: absolute;
-            top: 10px;
-        }
-        .nav.left {
-            left: 10px;
-        }
-        .nav.right {
-            right: 10px;
-        }
-        .nav img {
-            width: 30px;
-            height: 30px;
-            margin: 0 5px;
+            opacity: 0;
             cursor: pointer;
         }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
+        .theme-toggle label {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            background-color: #ccc;
+            border-radius: 34px;
         }
-        .gallery img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
+        .theme-toggle label::before {
+            content: "";
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background-color: white;
+            top: 4px;
+            left: 4px;
+            transition: transform 0.3s;
         }
-        .text-blog {
-            margin: 20px 0;
+        .theme-toggle input:checked + label::before {
+            transform: translateX(26px);
+        }
+        .theme-toggle label:hover::after {
+            content: attr(data-hover-text);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #000;
+            color: #fff;
+            padding: 2px 5px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .blog-post {
+            border-bottom: 1px solid var(--post-border);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+        .post-title {
+            cursor: pointer;
+            color: var(--link-color);
+        }
+        .post-title:hover {
+            text-decoration: underline;
+        }
+        .post-date {
+            font-size: 0.9em;
+            color: var(--post-date-color);
+        }
+        .glowing-text {
+            color: var(--glow-text-color);
+            text-shadow: 0 0 5px var(--glow-text-color), 0 0 10px var(--glow-text-color), 0 0 15px var(--glow-text-color), 0 0 20px var(--glow-text-color);
+        }
+        .floating-image {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: auto;
+            z-index: 1000;
+        }
+        .archive-link {
+            color: var(--link-color);
+            display: block;
+            text-decoration: none;
+            transition: text-shadow 0.3s ease;
+            margin-bottom: 5px;
+        }
+        .archive-link:hover {
+            text-shadow: 0 0 5px var(--link-hover-glow), 0 0 10px var(--link-hover-glow), 0 0 15px var(--link-hover-glow), 0 0 20px var(--link-hover-glow);
+        }
+        .archive-date {
+            font-size: 0.8em;
+            color: var(--post-date-color);
+        }
+        .image-bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .image-bullet-list li {
+            background: url('http://i.imgur.com/L9jzupY.gif') no-repeat left center;
+            background-size: 16px 16px;
+            padding-left: 24px;
+            margin-bottom: 8px;
+        }
+        .strawberry-bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .strawberry-bullet-list li {
+            background: url('http://i.imgur.com/uR7tmDk.gif') no-repeat left center;
+            background-size: 16px 16px;
+            padding-left: 24px;
+            margin-bottom: 8px;
+        }
+        .plus-sign-bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .plus-sign-bullet-list li {
+            background: url('http://i.imgur.com/eUHcz5M.gif') no-repeat left center;
+            background-size: 16px 16px;
+            padding-left: 24px;
+            margin-bottom: 8px;
+        }
+        /* Dark Theme Variables */
+        :root {
+            --background-color: #121212;
+            --text-color: #e0e0e0;
+            --header-background: #1f1f1f;
+            --header-text-color: white;
+            --navbar-background: #333;
+            --link-color: #f2f2f2;
+            --link-hover-glow: #ff69b4;
+            --content-background: #1f1f1f;
+            --column-background: #2c2c2c;
+            --scrollbar-track: #2c2c2c;
+            --scrollbar-thumb: #ffffff;
+            --footer-background: #333;
+            --footer-text-color: white;
+            --post-border: #444;
+            --post-date-color: #bbb;
+            --glow-text-color: #ff69b4;
+            --button-background: #ff69b4;
+            --button-text: #1f1f1f;
+            --button-hover-background: #ff8abf;
+        }
+        /* Pink Theme Variables */
+        .pink-theme {
+            --background-color: #ffe6f2;
+            --text-color: #333;
+            --header-background: #ff99cc;
+            --header-text-color: #ffffff;
+            --navbar-background: #ff80bf;
+            --link-color: #ffffff;
+            --link-hover-glow: #ffffff;
+            --content-background: #ffccf9;
+            --column-background: #ffb3d9;
+            --scrollbar-track: #ff99cc;
+            --scrollbar-thumb: #ffffff;
+            --footer-background: #ff80bf;
+            --footer-text-color: #ffffff;
+            --post-border: #ff6699;
+            --post-date-color: #993366;
+            --glow-text-color: #ff66b3;
+            --button-background: #ff66b3;
+            --button-text: #ffffff;
+            --button-hover-background: #ff3385;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const posts = [
+                {
+                    title: 'Twentieth Post',
+                    date: '2024-06-20',
+                    content: 'This is the content of my twentieth post. Here is a list with bear bullets:<ul class="image-bullet-list"><li>Bear item 1</li><li>Bear item 2</li><li>Bear item 3</li></ul>'
+                },
+                {
+                    title: 'Nineteenth Post',
+                    date: '2024-06-19',
+                    content: 'This is the content of my nineteenth post. Here is a list with strawberry bullets:<ul class="strawberry-bullet-list"><li>Strawberry item 1</li><li>Strawberry item 2</li><li>Strawberry item 3</li></ul>'
+                },
+                {
+                    title: 'Eighteenth Post',
+                    date: '2024-06-18',
+                    content: 'This is the content of my eighteenth post. Here is a list with plus sign bullets:<ul class="plus-sign-bullet-list"><li>Plus item 1</li><li>Plus item 2</li><li>Plus item 3</li></ul>'
+                },
+                {
+                    title: 'Seventeenth Post',
+                    date: '2024-06-17',
+                    content: 'This is the content of my seventeenth post.'
+                },
+                {
+                    title: 'Sixteenth Post',
+                    date: '2024-06-16',
+                    content: 'This is the content of my sixteenth post.'
+                },
+                {
+                    title: 'Fifteenth Post',
+                    date: '2024-06-15',
+                    content: 'This is the content of my fifteenth post.'
+                },
+                {
+                    title: 'Fourteenth Post',
+                    date: '2024-06-14',
+                    content: 'This is the content of my fourteenth post.'
+                },
+                {
+                    title: 'Thirteenth Post',
+                    date: '2024-06-13',
+                    content: 'This is the content of my thirteenth post.'
+                },
+                {
+                    title: 'Twelfth Post',
+                    date: '2024-06-12',
+                    content: 'This is the content of my twelfth post.'
+                },
+                {
+                    title: 'Eleventh Post',
+                    date: '2024-06-11',
+                    content: 'This is the content of my eleventh post.'
+                },
+                {
+                    title: 'Tenth Post',
+                    date: '2024-06-10',
+                    content: 'This is the content of my tenth post.'
+                },
+                {
+                    title: 'Ninth Post',
+                    date: '2024-06-09',
+                    content: 'This is the content of my ninth post.'
+                },
+                {
+                    title: 'Eighth Post',
+                    date: '2024-06-08',
+                    content: 'This is the content of my eighth post.'
+                },
+                {
+                    title: 'Seventh Post',
+                    date: '2024-06-07',
+                    content: 'This is the content of my seventh post.'
+                },
+                {
+                    title: 'Sixth Post',
+                    date: '2024-06-06',
+                    content: 'This is the content of my sixth post.'
+                },
+                {
+                    title: 'Fifth Post',
+                    date: '2024-06-05',
+                    content: 'This is the content of my fifth post.'
+                },
+                {
+                    title: 'Fourth Post',
+                    date: '2024-06-04',
+                    content: 'This is the content of my fourth post.'
+                },
+                {
+                    title: 'Third Post',
+                    date: '2024-06-03',
+                    content: 'This is the content of my third post.'
+                },
+                {
+                    title: 'Second Post',
+                    date: '2024-06-02',
+                    content: 'This is the content of my second post.'
+                },
+                {
+                    title: 'First Post',
+                    date: '2024-06-01',
+                    content: 'This is the content of my first post.'
+                }
+            ];
+
+            // Display the most recent post
+            function displayMostRecentPost() {
+                const blogSection = document.getElementById('blog-section');
+                blogSection.innerHTML = '';
+                const recentPost = posts[0];
+                
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-post';
+                postElement.id = 'post-0';
+                postElement.innerHTML = `
+                    <h3 class="glowing-text">${recentPost.title}</h3>
+                    <p class="post-date">${recentPost.date}</p>
+                    <p>${recentPost.content}</p>
+                `;
+                blogSection.appendChild(postElement);
+            }
+
+            // Display the archive links
+            function displayArchiveLinks() {
+                const archiveSection = document.getElementById('archive-section');
+                archiveSection.innerHTML = '<h2>Archive</h2>';
+                posts.forEach((post, index) => {
+                    const archiveLink = document.createElement('a');
+                    archiveLink.className = 'archive-link';
+                    archiveLink.href = `#post-${index}`;
+                    // Extract month and day
+                    const [year, month, day] = post.date.split('-');
+                    const formattedDate = `${month}-${day}`;
+                    archiveLink.innerHTML = `${post.title} <span class="archive-date">${formattedDate}</span>`;
+                    archiveLink.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        displayPost(index);
+                    });
+                    archiveSection.appendChild(archiveLink);
+                });
+            }
+
+            // Display a specific post
+            function displayPost(index) {
+                const blogSection = document.getElementById('blog-section');
+                blogSection.innerHTML = '';
+                const post = posts[index];
+                
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-post';
+                postElement.id = 'post-' + index;
+                postElement.innerHTML = `
+                    <h3 class="glowing-text">${post.title}</h3>
+                    <p class="post-date">${post.date}</p>
+                    <p>${post.content}</p>
+                `;
+                blogSection.appendChild(postElement);
+            }
+
+            // Function to toggle theme
+            function toggleTheme() {
+                document.body.classList.toggle('pink-theme');
+                const hoverText = document.body.classList.contains('pink-theme') ? 'dark mode' : 'pink mode';
+                themeToggleLabel.setAttribute('data-hover-text', hoverText);
+            }
+
+            displayMostRecentPost();
+            displayArchiveLinks();
+
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeToggleLabel = document.querySelector('.theme-toggle label');
+            themeToggle.addEventListener('change', toggleTheme);
+            themeToggleLabel.setAttribute('data-hover-text', 'pink mode');
+        });
+    </script>
 </head>
 <body>
+    <div class="header">
+        <img src="https://i.imgur.com/rGriRkI.gif" alt="Left Wing" class="wing-left">
+        <h1 class="glowing-text">My Personal Blog</h1>
+        <img src="https://i.imgur.com/WitReQX.gif" alt="Right Wing" class="wing-right">
+    </div>
+    <div class="navbar">
+    <a href="index.html">Blog</a>
+    <a href="pics.html">Pics</a>
+    <a href="#placeholder3">Placeholder 3</a>
+</div>
     <div class="container">
-        <div class="title">
-            My Blog
-            <div class="nav left">
-                <a href="index.html"><img src="https://i.imgur.com/CbElYks.gif" alt="Home"></a>
-                <a href="text-blog.html"><img src="https://i.imgur.com/CbElYks.gif" alt="Blog"></a>
-                <a href="page3.html"><img src="https://i.imgur.com/CbElYks.gif" alt="Page 3"></a>
-                <a href="page4.html"><img src="https://i.imgur.com/CbElYks.gif" alt="Page 4"></a>
+        <div class="content-box">
+            <div class="column left" id="archive-section">
+                <h2>Archive</h2>
             </div>
-            <div class="nav right">
-                <a href="index.html"><img src="https://i.imgur.com/CbElYks.gif" alt="Home"></a>
-                <a href="bloggy.html"><img src="https://i.imgur.com/CbElYks.gif" alt="Blog"></a>
-                <a href="page3.html"><img src="https://i.imgur.com/CbElYks.gif" alt="Page 3"></a>
-                <a href="page4.html"><img src="https://i.imgur.com/CbElYks.gif" alt="Page 4"></a>
+            <div class="column middle" id="blog-section">
+                <h2>Blog</h2>
             </div>
-        </div>
-        <div class="gallery">
-            <img src="https://i.imgur.com/nLG9v1A.gif" alt="Image 1">
-            <!-- Repeat the above line for more images -->
+            <div class="column right">
+                <h2>About Me</h2>
+                <p>This is the about me section.</p>
+            </div>
         </div>
     </div>
+    <div class="footer"></div>
+    <div class="theme-toggle">
+        <input type="checkbox" id="theme-toggle">
+        <label for="theme-toggle"></label>
+    </div>
+    <img src="https://imgur.com/hfZsqQV.jpg" alt="Cute Character" class="floating-image">
 </body>
 </html>
