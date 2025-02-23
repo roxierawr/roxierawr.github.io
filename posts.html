@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>emoslut.baby</title>
+  <style>
+    @font-face {
+      font-family: 'PORKYS';
+      src: url('PORKYS_.TTF') format('truetype');
+    }
+    body {
+      background-color: #ffd1e9;
+      font-family: 'PORKYS', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 5px hotpink;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .banner {
+      width: 100%;
+      height: 150px;
+      background: url('images/banner.png') center/cover no-repeat;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px;
+    }
+    .nav-item {
+      position: relative;
+      display: inline-block;
+    }
+    .nav-item img {
+      width: 120px;
+      cursor: pointer;
+    }
+    .nav-item a {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffb0d9;
+      font-size: 16px;
+      text-decoration: none;
+      text-shadow: 1px 1px 3px white;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto;
+      max-width: 1200px;
+      gap: 20px;
+    }
+    .box {
+      width: 25%;
+      height: 400px;
+      background-color: #ffbade;
+      padding: 15px;
+      border: 2px dotted hotpink;
+      overflow-y: auto;
+      text-align: left;
+    }
+    .middle-container {
+      width: 50%;
+    }
+    a {
+      color: #ff8cc8 !important;
+      text-shadow: 1px 1px 3px white;
+      text-decoration: none;
+    }
+    a:hover {
+      color: hotpink !important;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      padding-left: 30px;
+      background: url('images/bullet.png') left center no-repeat;
+      background-size: 20px;
+      margin-bottom: 5px;
+    }
+    ul li a {
+      color: #ff8cc8 !important;
+      text-shadow: 1px 1px 3px white;
+      text-decoration: none;
+    }
+    ul li a:hover {
+      color: hotpink !important;
+    }
+    .floating-image {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 200px;
+      height: auto;
+      z-index: 1000;
+    }
+    .dark-mode {
+      background-color: #222 !important;
+      color: hotpink !important;
+    }
+    .dark-mode .box {
+      background-color: #333 !important;
+      border-color: hotpink !important;
+    }
+    .dark-mode .links ul li a {
+      color: #ffb0d9 !important;
+    }
+    .dark-mode .links ul li a:hover {
+      color: hotpink !important;
+    }
+    .toggle-container {
+      margin: 20px;
+      text-align: center;
+    }
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: hotpink;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 24px;
+      width: 24px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    input:checked + .slider {
+      background-color: #444;
+    }
+    input:checked + .slider:before {
+      transform: translateX(30px);
+    }
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #ffd1e9;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: hotpink;
+      border-radius: 10px;
+      border: 2px solid #ffd1e9;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff69b4;
+    }
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: hotpink #ffd1e9;
+    }
+    .post {
+      background: hotpink;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px 0;
+      box-shadow: 0 0 8px white;
+      text-align: left;
+    }
+    .post a {
+      color: white;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .post p {
+      font-size: 14px;
+      color: white;
+      margin-top: 5px;
+      line-height: 1.5;
+    }
+    .post img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 5px white;
+      margin-top: 5px;
+    }
+    .tumblr-container {
+      margin-top: 20px;
+    }
+    .tumblr-title {
+      font-size: 24px;
+      color: hotpink;
+      text-shadow: 2px 2px 5px white;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .tumblr-post {
+      background: hotpink;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px 0;
+      box-shadow: 0 0 8px white;
+      text-align: left;
+    }
+    .tumblr-post a {
+      color: white;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .tumblr-post img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 5px white;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner"></div>
+  
+  <div class="nav-container">
+    <div class="nav-item">
+      <img src="images/cloud.png" alt="Cloud">
+      <a href="index.html">home</a>
+    </div>
+    <div class="nav-item">
+      <img src="images/cloud.png" alt="Cloud">
+      <a href="diary.html">diary</a>
+    </div>
+    <div class="nav-item">
+      <img src="images/cloud.png" alt="Cloud">
+      <a href="posts.html">posts</a>
+    </div>
+    <div class="nav-item">
+      <img src="images/cloud.png" alt="Cloud">
+      <a href="links.html">links</a>
+    </div>
+  </div>
+  
+  <div class="container">
+    <!-- Left Column: Tumblr Posts -->
+    <div class="box links">
+      <div class="tumblr-container">
+        <p><center>˚₊‧꒰ა <a href="https://mooxfang.tumblr.com/" title="visit my tumblr!">tumblr</a> ໒꒱ ‧₊˚</center></p>
+        <div id="tumblr-feed">
+          <p>loading tumblr posts...</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Middle Column: Reddit Posts -->
+    <div class="box middle-container">
+      <p><center>˚₊‧꒰ა <a href="https://www.reddit.com/r/roxieroom/" title="visit my subreddit!">reddit</a> ໒꒱ ‧₊˚</center></p>
+      <div id="reddit-feed">
+        <p>loading reddit posts...</p>
+      </div>
+    </div>
+    
+    <!-- Right Column: Tweets -->
+    <div class="box tweets">
+      <p><center>˚₊‧꒰ა <a href="https://x.com/petiteroxie" title="visit my nsfwtwt!">twitter</a> ໒꒱ ‧₊˚</center></p>
+      <a class="twitter-timeline" data-width="300" data-height="325" data-theme="dark" href="https://twitter.com/petiteroxie?ref_src=twsrc%5Etfw">roxie luvs u</a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+  </div>
+  
+  <div class="toggle-container">
+    <label class="toggle-switch">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+  
+  <script>
+    async function fetchRedditPosts(retryCount = 0) {
+      const redditFeed = document.getElementById("reddit-feed");
+      redditFeed.innerHTML = "";
+      try {
+        let response = await fetch("https://www.reddit.com/r/RoxieRoom/new.json?limit=10");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        let data = await response.json();
+        data.data.children.forEach(post => {
+          let postData = post.data;
+          let postElement = document.createElement("div");
+          postElement.classList.add("post");
+          let postTitle = document.createElement("a");
+          postTitle.href = "https://www.reddit.com" + postData.permalink;
+          postTitle.target = "_blank";
+          postTitle.textContent = postData.title;
+          postElement.appendChild(postTitle);
+          if (postData.selftext) {
+            let postText = document.createElement("p");
+            postText.textContent = postData.selftext.substring(0, 200) + "...";
+            postElement.appendChild(postText);
+          }
+          let imageUrls = [];
+          if (postData.url.match(/\.(jpg|jpeg|png|gif)$/)) {
+            imageUrls.push(postData.url);
+          } else if (postData.preview?.images?.length) {
+            imageUrls.push(postData.preview.images[0].source.url.replace(/&amp;/g, "&"));
+          } else if (postData.is_gallery && postData.media_metadata) {
+            Object.values(postData.media_metadata).forEach(media => {
+              if (media.s && media.s.u) {
+                imageUrls.push(media.s.u.replace(/&amp;/g, "&"));
+              }
+            });
+          } else if (postData.crosspost_parent_list?.[0]?.preview?.images?.length) {
+            imageUrls.push(postData.crosspost_parent_list[0].preview.images[0].source.url.replace(/&amp;/g, "&"));
+          }
+          if (imageUrls.length > 0) {
+            imageUrls.forEach(url => {
+              let postImage = document.createElement("img");
+              postImage.src = url;
+              postImage.onerror = function() { this.style.display = "none"; };
+              postElement.appendChild(postImage);
+            });
+          } else {
+            let noImageText = document.createElement("p");
+            noImageText.textContent = "No images available for this post.";
+            postElement.appendChild(noImageText);
+          }
+          redditFeed.appendChild(postElement);
+        });
+      } catch (error) {
+        console.error("Reddit fetch error:", error);
+        if (retryCount < 3) {
+          setTimeout(() => fetchRedditPosts(retryCount + 1), 3000);
+        } else {
+          redditFeed.innerHTML = `<p style="color: red;">Error loading posts</p>`;
+        }
+      }
+    }
+    fetchRedditPosts();
+  </script>
+  
+  <script>
+    // Helper function to strip HTML tags from a string
+    function stripHTML(html) {
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(html, 'text/html');
+      return doc.body.textContent || "";
+    }
+  
+    async function fetchTumblrPosts() {
+      const tumblrFeed = document.getElementById("tumblr-feed");
+      tumblrFeed.innerHTML = "";
+      try {
+        let response = await fetch("https://api.tumblr.com/v2/blog/mooxfang.tumblr.com/posts?api_key=Eh8qSnwkJxolDvbDlLndzzMff1qXi4ME3BVHtE6496bEFTv3C1");
+        let data = await response.json();
+        if (!data.response || !data.response.posts) {
+          tumblrFeed.innerHTML = "<p style='color: red;'>Error fetching posts</p>";
+          return;
+        }
+        data.response.posts.forEach(post => {
+          let postElement = document.createElement("div");
+          postElement.classList.add("tumblr-post");
+          if (post.question) {
+            let questionElement = document.createElement("p");
+            questionElement.textContent = "Q: " + stripHTML(post.question);
+            postElement.appendChild(questionElement);
+            let askerElement = document.createElement("p");
+            askerElement.textContent = "Asked by: " + (post.asking_name ? post.asking_name : "Anonymous");
+            postElement.appendChild(askerElement);
+            if (post.answer) {
+              let answerElement = document.createElement("p");
+              answerElement.textContent = "A: " + stripHTML(post.answer);
+              postElement.appendChild(answerElement);
+            } else if (post.body) {
+              let answerElement = document.createElement("p");
+              answerElement.textContent = "A: " + stripHTML(post.body);
+              postElement.appendChild(answerElement);
+            }
+          } else {
+            let postTitle = document.createElement("a");
+            postTitle.href = post.post_url;
+            postTitle.target = "_blank";
+            postTitle.textContent = post.summary || "View Post";
+            postElement.appendChild(postTitle);
+            if (post.photos && post.photos.length > 0) {
+              let postImage = document.createElement("img");
+              postImage.src = post.photos[0].original_size.url;
+              postImage.alt = "Tumblr Post Image";
+              postImage.onerror = function () { this.style.display = "none"; };
+              postElement.appendChild(postImage);
+            } else if (post.body) {
+              let tempDiv = document.createElement("div");
+              tempDiv.innerHTML = post.body;
+              let foundImg = tempDiv.querySelector("img");
+              if (foundImg) {
+                let postImage = document.createElement("img");
+                postImage.src = foundImg.src;
+                postImage.alt = "Tumblr Post Image from body";
+                postImage.onerror = function () { this.style.display = "none"; };
+                postElement.appendChild(postImage);
+              }
+            }
+          }
+          tumblrFeed.appendChild(postElement);
+        });
+      } catch (error) {
+        tumblrFeed.innerHTML = `<p style="color: red;">Error loading Tumblr posts</p>`;
+        console.error("Tumblr fetch error:", error);
+      }
+    }
+    fetchTumblrPosts();
+  </script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggle = document.getElementById("theme-toggle");
+      if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+        toggle.checked = true;
+      }
+      toggle.addEventListener("change", function () {
+        if (toggle.checked) {
+          document.body.classList.add("dark-mode");
+          localStorage.setItem("darkMode", "enabled");
+        } else {
+          document.body.classList.remove("dark-mode");
+          localStorage.setItem("darkMode", "disabled");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
