@@ -181,10 +181,9 @@
       scrollbar-color: hotpink #ffd1e9;
     }
     p, li {
-  font-family: 'Playfair Display', serif;
-  font-weight: bold;
-}
-
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+    }
     .post {
       background: hotpink;
       padding: 10px;
@@ -250,6 +249,15 @@
     .tumblr-post * {
       color: white !important;
       font-family: 'Playfair Display', serif !important;
+    }
+    /* Enforce white text with Playfair Display font in Reddit posts */
+    .post,
+    .post p,
+    .post a,
+    .post * {
+      color: white !important;
+      font-family: 'Playfair Display', serif !important;
+      font-weight: bold !important;
     }
   </style>
 </head>
