@@ -4,23 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>emoslut.baby</title>
+  <!-- Google Font for Playfair Display -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
     @font-face {
       font-family: 'PORKYS';
       src: url('PORKYS_.TTF') format('truetype');
     }
     body {
-    background-color: #ffd1e9;
-    font-family: 'PORKYS', sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: white;
-    text-shadow: 2px 2px 5px hotpink;
-    transition: background-color 0.3s, color 0.3s;
-    letter-spacing: 0.05em; /* Adjust this value as needed */
-}
-
+      background-color: #ffd1e9;
+      font-family: 'PORKYS', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 5px hotpink;
+      transition: background-color 0.3s, color 0.3s;
+      letter-spacing: 0.1em; /* Adjust this value as needed */
+    }
     .banner {
       width: 100%;
       height: 150px;
@@ -179,6 +180,9 @@
       scrollbar-width: thin;
       scrollbar-color: hotpink #ffd1e9;
     }
+    p, li {
+      font-family: 'Playfair Display', serif;
+    }
     .post {
       background: hotpink;
       padding: 10px;
@@ -226,7 +230,6 @@
       text-align: left;
     }
     .tumblr-post a {
-      color: white;
       font-size: 18px;
       text-decoration: none;
       font-weight: bold;
@@ -238,6 +241,13 @@
       border-radius: 8px;
       box-shadow: 0 0 5px white;
       margin-top: 5px;
+    }
+    /* Enforce white text with Playfair Display font in Tumblr posts */
+    .tumblr-post,
+    .tumblr-post p,
+    .tumblr-post * {
+      color: white !important;
+      font-family: 'Playfair Display', serif !important;
     }
   </style>
 </head>
