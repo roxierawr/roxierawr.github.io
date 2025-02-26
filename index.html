@@ -3,319 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>emoslut.baby</title>
-	  <!-- Google Font for Playfair Display -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <title>Coming Soon</title>
     <style>
-        @font-face {
-            font-family: 'PORKYS';
-            src: url('PORKYS_.TTF') format('truetype');
-        }
-
         body {
-    background-color: #ffd1e9;
-    font-family: 'PORKYS', sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: white;
-    text-shadow: 2px 2px 5px hotpink;
-    transition: background-color 0.3s, color 0.3s;
-    letter-spacing: 0.1em; /* Adjust this value as needed */
-}
-
-
-        .banner {
-            width: 100%;
-            height: 150px;
-            background: url('images/banner.png') center/cover no-repeat;
-        }
-
-        .nav-container {
+            background: url('https://i.imgur.com/dd1DZOW.gif') repeat;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 15px;
-            padding: 10px;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
-        .nav-item {
-            position: relative;
-            display: inline-block;
+        .center-image {
+            max-width: 300px;
+            margin-bottom: 20px;
         }
-        .nav-item img {
-            width: 120px;
-            cursor: pointer;
-        }
-        .nav-item a {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #ffb0d9;
-            font-size: 16px;
-            text-decoration: none;
-            text-shadow: 1px 1px 3px white;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            margin: 20px auto;
-            max-width: 1200px;
-            gap: 20px;
-        }
-        }
-		.combined-container a {
-			color: #ffb0d9 !important;
-			text-shadow: 1px 1px 3px white;
-			text-decoration: none;
-		}
-
-		.combined-container a:hover {
-			color: hotpink !important;
-		}
-
-        .box {
-            width: 25%;
-            height: 400px;
-            background-color: #ffbade;
-            padding: 15px;
-            border: 2px dotted hotpink;
-            overflow-y: auto;
-            text-align: left;
-        }
-
-        .middle-container {
-            width: 50%;
-        }
-a {
-    color: #ff8cc8 !important;
-    text-shadow: 1px 1px 3px white;
-    text-decoration: none;
-}
-
-a:hover {
-    color: hotpink !important;
-}
-        ul {
-    list-style: none;
-    padding: 0;
-}
-        ul {
-    list-style: none;
-    padding: 0;
-}
-
-ul li {
-    padding-left: 30px;
-    background: url('images/bullet.png') left center no-repeat;
-    background-size: 20px;
-    margin-bottom: 5px;
-}
-
-ul li a {
-    color: #ff8cc8 !important;
-    text-shadow: 1px 1px 3px white;
-    text-decoration: none;
-}
-
-ul li a:hover {
-    color: hotpink !important;
-}
-
-/* Apply the heart bullet globally */
-ul li.heartbullet {
-    background: url('https://i.imgur.com/vHW0SSm.gif') left center no-repeat;
-    background-size: 20px;
-}
-
-/* Apply the bunny bullet globally */
-ul li.bunnybullet {
-    background: url('https://i.imgur.com/E8yt6Lo.gif') left center no-repeat;
-    background-size: 20px;
-}
-
-		
-        .floating-image {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 200px;
-            height: auto;
-            z-index: 1000;
-        }
-
-        .dark-mode {
-            background-color: #222 !important;
-            color: hotpink !important;
-        }
-        .dark-mode .box {
-            background-color: #333 !important;
-            border-color: hotpink !important;
-        }
-        .dark-mode .links ul li a {
-            color: #ffb0d9 !important;
-        }
-        .dark-mode .links ul li a:hover {
-            color: hotpink !important;
-        }
-        /* Toggle Switch */
-        .toggle-container {
-            margin: 20px;
+        .link-list {
+            list-style: none;
+            padding: 0;
             text-align: center;
         }
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 30px;
+        .link-list li {
+            margin: 10px 0;
         }
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
+        .link-list a {
+            font-size: 20px;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
         }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: hotpink;
-            border-radius: 30px;
-            transition: 0.3s;
+        .link-list a:hover {
+            text-shadow: 0 0 20px rgba(0, 0, 0, 1);
         }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 24px;
-            width: 24px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            border-radius: 50%;
-            transition: 0.3s;
-        }
-        input:checked + .slider {
-            background-color: #444;
-        }
-        input:checked + .slider:before {
-            transform: translateX(30px);
-        }
-p, li {
-  font-family: 'Playfair Display', serif;
-  font-weight: bold;
-}
-
-
-/* Scrollbar for WebKit browsers (Chrome, Edge, Safari, Opera) */
-::-webkit-scrollbar {
-    width: 10px; /* Width of the scrollbar */
-}
-
-::-webkit-scrollbar-track {
-    background: #ffd1e9; /* Light pink background */
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: hotpink; /* Bright pink scrollbar */
-    border-radius: 10px;
-    border: 2px solid #ffd1e9; /* Adds some contrast */
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #ff69b4; /* Darker pink on hover */
-}
-
-/* Firefox scrollbar styling */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: hotpink #ffd1e9;
-}
-
     </style>
 </head>
 <body>
-
-    <div class="banner"></div>
-    
-    <div class="nav-container">
-        <div class="nav-item">
-            <img src="images/cloud.png" alt="Cloud">
-            <a href="index.html">home</a>
-        </div>
-        <div class="nav-item">
-            <img src="images/cloud.png" alt="Cloud">
-            <a href="diary.html">diary</a>
-        </div>
-        <div class="nav-item">
-            <img src="images/cloud.png" alt="Cloud">
-            <a href="posts.html">posts</a>
-        </div>
-		<div class="nav-item">
-      <img src="images/cloud.png" alt="Cloud">
-      <a href="gallery.html">gallery</a>
-    </div>
-	<div class="nav-item">
-      <img src="images/cloud.png" alt="Cloud">
-      <a href="videos.html">videos</a>
-    </div>
-        <div class="nav-item">
-            <img src="images/cloud.png" alt="Cloud">
-            <a href="links.html">links</a>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="box links">
-            <ul>
-                <li class="heartbullet"><a href="https://discord.gg/roxieroom">join my personal 18+ server ♡</a></li>
-				<li class="heartbullet"><a href="https://discord.gg/RCM6MspZYB">join my public sexting server ♡</a></li>
-				<li class="heartbullet"><a href="https://discord.gg/Y939zXZ9VD">join my gaming server ♡</a></li> 
-				<li class="bunnybullet"><a href="https://fansly.com/petiteroxie/posts">cum 2 my fansly ♡</a></li>
-				<li class="bunnybullet"><a href="https://www.youtube.com/@mooxfang">sub 2 my youtube channel♡</a></li>
-
-            </ul>
-			<img src="https://i.imgur.com/5CyY7wa.gif" width="95"> <img src="https://i.imgur.com/ijrqf6q.gif" width="95">
-
-        </div>
-        <div class="box middle-container">
-            <p>awaawawawawa awaawawawawa awaawawawawa awaawawawawa awaawawawawa...</p>
-        </div>
-        <div class="box image-gallery">
-            <img src="images/CARAMELLDANSEN.gif" alt="CARAMELLDANSEN">
-            <img src="images/textingloli.gif" alt="textingloli">
-            <img src="images/mikuu.jpg" alt="mikuu">
-        </div>
-    </div>
-
-    <div class="toggle-container">
-        <label class="toggle-switch">
-            <input type="checkbox" id="theme-toggle">
-            <span class="slider"></span>
-        </label>
-    </div>
-    <img src="https://imgur.com/hfZsqQV.jpg" alt="Cute Character" class="floating-image">
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const toggle = document.getElementById("theme-toggle");
-      if (localStorage.getItem("darkMode") === "enabled") {
-        document.body.classList.add("dark-mode");
-        toggle.checked = true;
-      }
-      toggle.addEventListener("change", function () {
-        if (toggle.checked) {
-          document.body.classList.add("dark-mode");
-          localStorage.setItem("darkMode", "enabled");
-        } else {
-          document.body.classList.remove("dark-mode");
-          localStorage.setItem("darkMode", "disabled");
-        }
-      });
-    });
-  </script>
-	
-
+    <img src="https://i.imgur.com/73xUYjz.gif" alt="Centered Image" class="center-image">
+    <ul class="link-list">
+        <li><a href="https://fansly.com/petiteroxie/posts">my fansly   . ۫ ꣑ৎ   .  </a></li>
+        <li><a href="https://linktr.ee/petiteroxie">all links   . ۫ ꣑ৎ   .  </a></li>
+    </ul>
 </body>
 </html>
