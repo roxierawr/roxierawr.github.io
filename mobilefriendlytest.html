@@ -83,6 +83,7 @@
       }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <div class="wrapper">
@@ -95,9 +96,7 @@
 
     <div class="main-content">
       <div class="content-box">
-        <h1>Welcome to My Retro Blog</h1>
-        <p>This is where your blog post content will show up.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel velit ut justo blandit blandit.</p>
+        <h1>Loading blog posts...</h1>
       </div>
 
       <div class="widget-box">
@@ -109,5 +108,36 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const API_URL = 'http://localhost:1337/api/posts';
+
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => {
+        const posts = data.data;
+        const container = document.querySelector('.content-box');
+        container.innerHTML = '<h1>Latest Blog Posts</h1>';
+
+        posts.forEach(post => {
+          const { title, content, createdAt } = post.attributes;
+
+          const article = document.createElement('article');
+          article.innerHTML = `
+            <h2>${title}</h2>
+            <p><em>${new Date(createdAt).toLocaleDateString()}</em></p>
+            <div>${marked.parse(content)}</div>
+            <hr />
+          `;
+
+          container.appendChild(article);
+        });
+      })
+      .catch(err => {
+        const container = document.querySelector('.content-box');
+        container.innerHTML = '<p>Failed to load posts. Check the API or your connection.</p>';
+        console.error('Error fetching posts:', err);
+      });
+  </script>
 </body>
 </html>
